@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumor.local/contracts/Dataset/1.0.0",
+  "title": "Dataset",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "dataset_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "project_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "created",
+        "processing",
+        "ready",
+        "failed",
+        "archived"
+      ]
+    },
+    "task_type": {
+      "enum": [
+        "general",
+        "coding",
+        "research",
+        "retrieval",
+        "multimodal"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "uniqueItems": true
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "contract_version",
+    "dataset_id",
+    "project_id",
+    "version",
+    "status",
+    "task_type",
+    "source_ids",
+    "record_count",
+    "schema_version",
+    "created_at"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumor.local/contracts/Source/1.0.0",
+  "title": "Source",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "source_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "project_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "source_type": {
+      "enum": [
+        "file",
+        "github",
+        "url"
+      ]
+    },
+    "source_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "media_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "checksum_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "uri": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "contract_version",
+    "source_id",
+    "project_id",
+    "source_type",
+    "source_name",
+    "media_type",
+    "checksum_sha256",
+    "uri",
+    "metadata",
+    "created_at"
+  ]
+}

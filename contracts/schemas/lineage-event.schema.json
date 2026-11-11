@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumor.local/contracts/LineageEvent/1.0.0",
+  "title": "LineageEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "dataset_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "dataset_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "event_type": {
+      "enum": [
+        "source_added",
+        "extracted",
+        "understood",
+        "quality_checked",
+        "transformed",
+        "optimized",
+        "validated",
+        "exported"
+      ]
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "output_checksum_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "contract_version",
+    "event_id",
+    "dataset_id",
+    "dataset_version",
+    "event_type",
+    "actor",
+    "timestamp",
+    "input_references",
+    "output_checksum_sha256",
+    "metadata"
+  ]
+}

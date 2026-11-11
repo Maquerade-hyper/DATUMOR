@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumor.local/contracts/ProcessingProfile/1.0.0",
+  "title": "ProcessingProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "profile_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "profile_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "enum": [
+        "general",
+        "coding",
+        "research",
+        "retrieval",
+        "multimodal"
+      ]
+    },
+    "output_format": {
+      "enum": [
+        "jsonl",
+        "json",
+        "parquet",
+        "csv"
+      ]
+    },
+    "options": {
+      "type": "object"
+    },
+    "chunking": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "overlap_tokens": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "enabled",
+        "max_tokens",
+        "overlap_tokens"
+      ]
+    }
+  },
+  "required": [
+    "contract_version",
+    "profile_id",
+    "profile_name",
+    "task_type",
+    "output_format",
+    "options"
+  ]
+}

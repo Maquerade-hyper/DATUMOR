@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumor.local/contracts/QualityReport/1.0.0",
+  "title": "QualityReport",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "dataset_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "dataset_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "warning",
+        "failed"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "warning",
+              "error"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ]
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "contract_version",
+    "dataset_id",
+    "dataset_version",
+    "overall_score",
+    "status",
+    "metrics",
+    "issues",
+    "generated_at"
+  ]
+}

@@ -1,0 +1,53 @@
+﻿services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: datumor-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - datumor_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: datumor-redis
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - datumor_redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+
+  seaweedfs:
+    image: chrislusf/seaweedfs@sha256:ccad23e18639c8b98cee17e7100b95830a06077b56d8e5b006d6dcf8ec5e94a0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8333:8333"
+    environment:
+      AWS_ACCESS_KEY_ID: ${DATUMOR_S3_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${DATUMOR_S3_SECRET_KEY}
+      S3_BUCKET: datumor
+    volumes:
+      - weed_data:/data
+volumes:
+  datumor_postgres:
+  datumor_redis:
+  datumor_minio:
+  weed_data: {}
+

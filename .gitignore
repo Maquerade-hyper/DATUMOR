@@ -1,0 +1,49 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Frontend
+node_modules/
+dist/
+build/
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Runtime data
+*.log
+*.pid
+.tmp/
+temp/
+cache/
+
+# Local infrastructure data
+data/
+storage/
+volumes/
+
+# Test artifacts
+htmlcov/
+.coverage
+
+# Generated exports
+exports/
+artifacts/
