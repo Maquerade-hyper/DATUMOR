@@ -1,4 +1,4 @@
-﻿# Python
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -47,3 +47,18 @@ htmlcov/
 # Generated exports
 exports/
 artifacts/
+
+# Local staged uploads
+data/staging/*
+!data/staging/.gitkeep
+
+# DATUMOR local secrets and environment
+access_token*.txt
+h5_customer_b_details.json
+h5_customer_b_test.txt
+# Local datasets, downloaded repositories and backups
+/data/
+/backups/
+/.tmp/
+# Python environments and generated files
+# Local editor and operating-system files

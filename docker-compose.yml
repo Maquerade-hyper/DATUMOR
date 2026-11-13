@@ -1,4 +1,4 @@
-﻿services:
+services:
   postgres:
     image: postgres:16-alpine
     container_name: datumor-postgres
@@ -45,9 +45,102 @@
       S3_BUCKET: datumor
     volumes:
       - weed_data:/data
+
+  datumor-migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: datumor:local
+    env_file:
+      - .env
+    environment:
+      DATUMOR_DB_USER: ${POSTGRES_USER}
+      DATUMOR_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DATUMOR_DB_NAME: ${POSTGRES_DB}
+      DATUMOR_DB_HOST: postgres
+      DATUMOR_DB_PORT: 5432
+    command: ["python", "scripts/migrate.py"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: datumor:local
+    container_name: datumor-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATUMOR_DB_USER: ${POSTGRES_USER}
+      DATUMOR_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DATUMOR_DB_NAME: ${POSTGRES_DB}
+      DATUMOR_DB_HOST: postgres
+      DATUMOR_DB_PORT: 5432
+      DATUMOR_REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/1
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      DATUMOR_S3_ENDPOINT: http://seaweedfs:8333
+      DATUMOR_STAGING_DIR: /app/data/staging
+    ports:
+      - "127.0.0.1:8001:8000"
+    volumes:
+      - datumor_data:/app/data
+    command: ["uvicorn", "apps.api.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      datumor-migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=4)"
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: datumor:local
+    container_name: datumor-worker
+    user: "65534:65534"
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATUMOR_DB_USER: ${POSTGRES_USER}
+      DATUMOR_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DATUMOR_DB_NAME: ${POSTGRES_DB}
+      DATUMOR_DB_HOST: postgres
+      DATUMOR_DB_PORT: 5432
+      DATUMOR_REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/1
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      DATUMOR_S3_ENDPOINT: http://seaweedfs:8333
+      DATUMOR_STAGING_DIR: /app/data/staging
+    volumes:
+      - datumor_data:/app/data
+    command: ["python", "-m", "apps.worker"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      datumor-migrate:
+        condition: service_completed_successfully
+
 volumes:
   datumor_postgres:
   datumor_redis:
   datumor_minio:
   weed_data: {}
-
+  datumor_data:

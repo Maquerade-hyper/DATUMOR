@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datumor.local/schemas/multimodal-record-1.0.0.json",
+  "title": "DATUMOR Multimodal Record",
+  "description": "Canonical provenance-preserving multimodal record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "schema_version",
+    "created_at",
+    "modalities",
+    "temporal",
+    "provenance",
+    "warnings",
+    "validation"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modalities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "audio": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "video": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "images",
+        "audio",
+        "video"
+      ]
+    },
+    "temporal": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "sources",
+        "upstream_reports"
+      ],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "upstream_reports": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "derived_sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "relationship",
+              "derived_source",
+              "parent_source",
+              "extraction_path"
+            ],
+            "properties": {
+              "relationship": {
+                "const": "extracted_from"
+              },
+              "derived_source": {
+                "type": "object"
+              },
+              "parent_source": {
+                "type": "object"
+              },
+              "extraction_path": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "status",
+        "errors"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "valid",
+            "invalid"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
