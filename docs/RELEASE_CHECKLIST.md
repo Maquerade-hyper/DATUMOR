@@ -53,7 +53,7 @@ Verification date: 2026-11-13
 
 ### Pending release gates
 - [ ] Final human/legal review of third-party license obligations.
-- [ ] Decide whether to remove unused MinIO SDK and retest if removed.
+- [x] Remove unused MinIO Python SDK; verify Windows tests and rebuilt Docker runtime.
 - [x] Fresh manual Windows installation verified in an isolated clean worktree.
 - [x] Fresh manual Linux installation verified in an isolated clean worktree.
 - [x] Linux startup script syntax verified with Bash in an isolated Linux container.

@@ -1,4 +1,4 @@
-# Third-Party Notices
+﻿# Third-Party Notices
 
 Generated: 2026-11-13
 
@@ -59,7 +59,6 @@ Generated from the rebuilt datumor:local Docker image.
 | jsonschema                | 4.26.0      | MIT                                           | https://github.com/python-jsonschema/jsonschema                      |
 | jsonschema-specifications | 2025.9.1    | MIT                                           | https://github.com/python-jsonschema/jsonschema-specifications       |
 | kombu                     | 5.7.0       | BSD-3-Clause                                  | https://kombu.readthedocs.io                                         |
-| minio                     | 7.2.15      | Apache Software License                       | https://github.com/minio/minio-py                                    |
 | numpy                     | 2.2.6       | BSD License                                   | https://numpy.org                                                    |
 | onnxruntime               | 1.31.1      | MIT License                                   | https://onnxruntime.ai                                               |
 | packaging                 | 26.3        | Apache-2.0 OR BSD-2-Clause                    | https://github.com/pypa/packaging                                    |
@@ -177,7 +176,6 @@ testing, linting, and documentation tools that are not shipped in Docker.
 | jsonschema                | 4.26.0      | MIT                                           | https://github.com/python-jsonschema/jsonschema                      |
 | jsonschema-specifications | 2025.9.1    | MIT                                           | https://github.com/python-jsonschema/jsonschema-specifications       |
 | kombu                     | 5.7.0       | BSD-3-Clause                                  | https://kombu.readthedocs.io                                         |
-| minio                     | 7.2.15      | Apache Software License                       | https://github.com/minio/minio-py                                    |
 | numpy                     | 2.2.6       | BSD License                                   | https://numpy.org                                                    |
 | onnxruntime               | 1.31.1      | MIT License                                   | https://onnxruntime.ai                                               |
 | packaging                 | 26.3        | Apache-2.0 OR BSD-2-Clause                    | https://github.com/pypa/packaging                                    |
@@ -231,3 +229,43 @@ testing, linting, and documentation tools that are not shipped in Docker.
 
 Package metadata is an inventory aid, not a substitute for reviewing
 the complete upstream license texts and redistribution obligations.
+
+## Expanded Psycopg Binary Native-Component Inventory
+
+Observed in the Linux Docker runtime on 2026-11-13, inside
+`psycopg-binary==3.2.6` under `psycopg_binary.libs`.
+
+The following is a preliminary upstream attribution inventory. It is not
+a substitute for verifying the exact source revisions, copyright holders,
+and complete licence notices of the binaries in the distributed wheel.
+
+| Bundled file or group | Upstream component | Preliminary licence attribution | Verification status |
+|---|---|---|---|
+| `libpq-*.so.5.17` | PostgreSQL libpq | PostgreSQL License | Version previously identified as 17.0.4; retain upstream notice |
+| `libssl-*.so.3`, `libcrypto-*.so.3` | OpenSSL | Apache-2.0 for OpenSSL 3.x | Exact upstream release and notice pending |
+| `libkrb5-*.so.3`, `libkrb5support-*.so.0`, `libk5crypto-*.so.3`, `libgssapi_krb5-*.so.2` | MIT Kerberos | MIT Kerberos licence family and component-specific third-party notices | Exact source revision and complete notices pending |
+| `libldap-*.so.2`, `liblber-*.so.2` | OpenLDAP | OpenLDAP Public License 2.8 | Exact source revision and complete notices pending |
+| `libsasl2-*.so.3` | Cyrus SASL | BSD-3-Clause-Attribution | Exact source revision and notice pending |
+| `libpcre-*.so.1` | PCRE | BSD-3-Clause | Exact source revision and notice pending |
+| `libselinux-*.so.1` | SELinux libselinux | Upstream public-domain notice | Verify exact bundled source |
+| `libcom_err-*.so.2` | e2fsprogs libcom_err | Provisional MIT attribution reported by Fedora package metadata; exact bundled licence unverified | Exact bundled source and notice pending |
+| `libkeyutils-*.so.1` | Linux keyutils | LGPL-2.1 licence text exists upstream | Exact bundled source and applicable licence pending |
+
+Upstream references:
+
+- OpenSSL: https://openssl-library.org/source/license/
+- MIT Kerberos: https://web.mit.edu/kerberos/krb5-1.21/doc/mitK5license.html
+- OpenLDAP: https://openldap.org/doc/admin26/license.html
+- Cyrus SASL: https://sources.debian.org/src/cyrus-sasl2/2.1.28%2Bdfsg1-11/debian/copyright
+- PCRE: https://packages.fedoraproject.org/pkgs/pcre/pcre/
+- libselinux: https://github.com/SELinuxProject/selinux/blob/main/libselinux/LICENSE
+- libcom_err: https://packages.fedoraproject.org/pkgs/e2fsprogs/libcom_err/
+- keyutils: https://linux.googlesource.com/linux/kernel/git/dhowells/keyutils/+/refs/heads/master/LICENCE.LGPL
+
+The shared-library filenames and SONAMEs identify components and ABI
+families; they do not establish exact upstream release versions.
+
+Before redistributing Docker images or other binaries containing these
+components, verify the exact wheel provenance, source versions, copyright
+notices, complete licence texts, and all applicable redistribution
+conditions. Do not treat this preliminary inventory as legal clearance.

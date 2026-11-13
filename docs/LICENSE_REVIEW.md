@@ -1,4 +1,4 @@
-# Third-Party License Review
+﻿# Third-Party License Review
 
 Review scope: DATUMOR Python dependencies and the current open-source release.
 
@@ -118,7 +118,7 @@ Review date: 2026-11-13
 - Psycopg 3.2.6 and psycopg-binary 3.2.6 identify LGPLv3 licensing.
 - Certifi identifies MPL-2.0 licensing.
 - tqdm identifies MPL-2.0 AND MIT licensing.
-- MinIO SDK 7.2.15 remains installed. No direct MinIO references were found in the audited source directories.
+- MinIO SDK was removed from runtime requirements after isolated and original Windows test suites both passed (697 passed, 1 skipped). The application uses boto3 for S3-compatible storage; legacy MINIO_* environment-variable aliases remain for compatibility.
 
 ### Release conditions
 
@@ -130,3 +130,38 @@ Review date: 2026-11-13
 
 This is a technical inventory, not legal certification.
 Final redistribution approval remains pending.
+
+## Expanded Psycopg Native-Component Review — 2026-11-14
+
+The Linux Docker runtime inspection of `psycopg-binary==3.2.6` identified
+14 bundled shared-library files covering PostgreSQL, OpenSSL, MIT Kerberos,
+OpenLDAP, Cyrus SASL, PCRE, SELinux, e2fsprogs, and keyutils components.
+
+The expanded preliminary attribution inventory is recorded in
+`docs/THIRD_PARTY_NOTICES.md`.
+
+Important limitations:
+
+- The installed wheel's exact upstream source revisions for these bundled
+  libraries have not been established.
+- The embedded-string inspection did not produce usable licence evidence.
+- Some upstream projects contain multiple copyright holders and
+  component-specific licences.
+- The upstream project licence alone does not prove the licence of every
+  file in the bundled binary.
+- Complete applicable copyright and licence notices have not yet been
+  assembled and verified for all 14 files.
+
+Release implications:
+
+1. Keep human/legal review pending.
+2. Do not claim complete native-component licence compliance yet.
+3. Before redistributing Docker images or other binaries, verify wheel
+   provenance, exact component versions, complete notices, and applicable
+   LGPL, Apache, BSD, and other licence obligations.
+4. Re-run this inventory whenever the Psycopg binary wheel or runtime
+   image changes.
+
+The source-code release review and binary/Docker-image redistribution
+review must remain separate. This record is an engineering audit note,
+not legal advice or legal clearance.
