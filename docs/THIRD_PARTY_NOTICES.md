@@ -101,6 +101,11 @@ Generated from the rebuilt datumor:local Docker image.
 | vine                      | 5.1.0       | BSD License                                   | https://github.com/celery/vine                                       |
 | watchfiles                | 1.3.0       | MIT License                                   | https://github.com/samuelcolvin/watchfiles                           |
 | websockets                | 17.4        | BSD-3-Clause                                  | https://github.com/python-websockets/websockets                      |
+| grpcio | 1.85.1 | Apache-2.0 | https://grpc.io |
+| h2 | 4.4.1 | MIT | https://github.com/python-hyper/h2/ |
+| hpack | 4.2.0 | MIT | https://github.com/python-hyper/hpack/ |
+| hyperframe | 6.1.0 | MIT License | https://github.com/python-hyper/hyperframe/ |
+| portalocker | 4.4.2 | BSD-3-Clause | https://github.com/wolph/portalocker/ |
 
 ## Bundled native components
 
