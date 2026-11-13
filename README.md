@@ -1,4 +1,4 @@
-# DATUMOR
+﻿# DATUMOR
 
 Universal Multimodal Data Intelligence & Preparation Engine.
 
@@ -104,8 +104,8 @@ customer uploads, generated reports or local database data.
 
 - Docker Compose deployment and end-to-end processing: verified.
 - Non-root worker execution: verified.
-- Fresh manual Windows installation: not yet verified.
-- Fresh manual Linux installation: not yet verified.
+- Fresh manual Windows installation: verified in an isolated clean worktree.
+- Fresh manual Linux installation: verified in an isolated clean worktree.
 - Production certification: not claimed.
 ## Documentation
 

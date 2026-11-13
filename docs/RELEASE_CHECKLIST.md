@@ -1,4 +1,4 @@
-# DATUMOR Release Checklist
+﻿# DATUMOR Release Checklist
 
 This checklist is a preparation record, not a declaration that every item has passed.
 
@@ -21,7 +21,7 @@ This checklist is a preparation record, not a declaration that every item has pa
 - [x] Docker deployment and end-to-end processing verified.
 - [x] Non-root worker processing verified.
 - [x] Windows startup script syntax verified.
-- [ ] Linux startup script syntax verified (Bash unavailable in verification environment).
+- [x] Linux startup script syntax verified with Bash in an isolated Linux container.
 - [x] Fresh manual Windows installation verified in an isolated clean worktree.
 - [x] Fresh manual Linux installation verified in an isolated clean worktree.
 - [x] Final full test suite: Windows and Linux each reported 697 passed, 1 skipped.
@@ -54,9 +54,9 @@ Verification date: 2026-11-13
 ### Pending release gates
 - [ ] Final human/legal review of third-party license obligations.
 - [ ] Decide whether to remove unused MinIO SDK and retest if removed.
-- [ ] Fresh manual Windows installation verification.
-- [ ] Fresh manual Linux installation verification.
-- [ ] Linux startup scripts independently validated.
+- [x] Fresh manual Windows installation verified in an isolated clean worktree.
+- [x] Fresh manual Linux installation verified in an isolated clean worktree.
+- [x] Linux startup script syntax verified with Bash in an isolated Linux container.
 - [ ] Release version selected and approved.
 - [ ] Final release candidate review.
 - [ ] Explicit publication approval.
