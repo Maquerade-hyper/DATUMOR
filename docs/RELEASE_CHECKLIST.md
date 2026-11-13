@@ -22,10 +22,10 @@ This checklist is a preparation record, not a declaration that every item has pa
 - [x] Non-root worker processing verified.
 - [x] Windows startup script syntax verified.
 - [ ] Linux startup script syntax verified (Bash unavailable in verification environment).
-- [ ] Fresh manual Windows installation verified.
-- [ ] Fresh manual Linux installation verified.
-- [ ] Final full test suite run from release candidate.
-- [ ] Final secret and dependency audit completed.
+- [x] Fresh manual Windows installation verified in an isolated clean worktree.
+- [x] Fresh manual Linux installation verified in an isolated clean worktree.
+- [x] Final full test suite: Windows and Linux each reported 697 passed, 1 skipped.
+- [ ] Final secret and dependency audit completed, including bundled native and transitive components.
 
 ## Release
 - [ ] Approve license and release version.

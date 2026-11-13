@@ -103,6 +103,19 @@ Generated from the rebuilt datumor:local Docker image.
 | watchfiles                | 1.3.0       | MIT License                                   | https://github.com/samuelcolvin/watchfiles                           |
 | websockets                | 17.4        | BSD-3-Clause                                  | https://github.com/python-websockets/websockets                      |
 
+## Bundled native components
+
+The verified Psycopg binary distribution includes libpq 17.0.4.
+
+| Component | Version | License | License information |
+|---|---:|---|---|
+| libpq (bundled by psycopg-binary) | 17.0.4 | PostgreSQL License | https://www.postgresql.org/about/licence/ |
+
+Preserve the upstream PostgreSQL copyright and license notice when
+redistributing artifacts containing this bundled component. This entry
+describes the verified Docker runtime and should be rechecked when the
+Psycopg binary package or deployment image changes.
+
 ## Development environment dependencies
 
 Generated from the local .venv environment. This inventory can include
