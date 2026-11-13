@@ -128,7 +128,7 @@ def _derived_source_links(
             "Extracted audio report has no source name"
         )
 
-    if Path(extraction_path).name.casefold() != Path(audio_name).name.casefold():
+    if Path(extraction_path.replace("\\", "/")).name.casefold() != Path(audio_name.replace("\\", "/")).name.casefold():
         raise MultimodalRecordError(
             "Extracted audio filename does not match the video's "
             "recorded extraction path"

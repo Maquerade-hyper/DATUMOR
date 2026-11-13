@@ -1,4 +1,4 @@
-﻿# Third-Party Notices
+# Third-Party Notices
 
 Generated: 2026-11-13
 
@@ -15,6 +15,7 @@ Generated from the rebuilt datumor:local Docker image.
 | MarkupSafe                | 3.0.4       | BSD-3-Clause                                  | https://github.com/pallets/markupsafe/                               |
 | PyJWT                     | 2.10.1      | MIT License                                   | https://github.com/jpadilla/pyjwt                                    |
 | PyYAML                    | 6.0.3       | MIT License                                   | https://pyyaml.org/                                                  |
+| qdrant-client             | 1.20.0      | Apache Software License                       | https://github.com/qdrant/qdrant-client                              |
 | SQLAlchemy                | 2.0.40      | MIT License                                   | https://www.sqlalchemy.org                                           |
 | alembic                   | 1.15.2      | MIT License                                   | https://alembic.sqlalchemy.org                                       |
 | amqp                      | 5.4.2       | BSD License                                   | http://github.com/celery/py-amqp                                     |
